@@ -4,6 +4,9 @@ import constants.Constants;
 
 public class HaversineDistance implements Distance {
 
+    public HaversineDistance() {
+    }
+
     @Override
     public Double calculateDistance(final Location a, final Location b) {
         final double radius = Constants.EARTH_RADIUS;

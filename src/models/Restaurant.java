@@ -44,4 +44,13 @@ public class Restaurant {
     public void setOrders(final List<Order> orders) {
         this.orders = orders;
     }
+
+    // @Override
+    // public String toString() {
+    //     return "{" +
+    //         " restaurantLocation='" + getRestaurantLocation() + "'" +
+    //         ", preparationTime='" + getPreparationTime() + "'" +
+    //         ", orders='" + getOrders() + "'" +
+    //         "}";
+    // }
 }
