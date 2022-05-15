@@ -17,9 +17,10 @@ public class TreeBuilder {
         distanceCalculator = new HaversineDistance();
     }
 
-    public TreeNode getTree(List<List<String>> validPathsList, HashMap<String, Restaurant> restaurantMap, HashMap<String, Location> locationMap) {
+    public void buildTree(List<List<String>> validPathsList, HashMap<String, Restaurant> restaurantMap, HashMap<String, Location> locationMap, List<TreeNode> leafNodeList, HashMap<String, Double> graph) {
         TreeNode root = getTreeNode(false, "A");
         root.setCost(0.0);
+        root.setParent(null);
         root.setLocation(locationMap.get("A"));
         TreeNode parent = root;
         boolean isTerminating;
@@ -34,35 +35,38 @@ public class TreeBuilder {
                 }
                 // Create node if it does not exist
                 HashMap<String, TreeNode> children = parent.getChildren();
+                TreeNode newNode;
                 if(!children.containsKey(path.get(i))) {
                     children.put(path.get(i), getTreeNode(isTerminating, path.get(i)));
                     // Go to the newly created node & update it's cost
-                    TreeNode newNode = children.get(path.get(i));
+                    newNode = children.get(path.get(i));
                     newNode.setLocation(locationMap.get(path.get(i)));
-                    newNode.setCost(getNodeCost(parent, newNode, restaurantMap));
+                    newNode.setCost(getNodeCost(parent, newNode, restaurantMap, graph));
+                    newNode.setParent(parent);
+                    // Is this is a leaf node
+                    if(newNode.getTerminating()) {
+                        leafNodeList.add(newNode);
+                    }
                 }
                 // Update parent
                 parent = children.get(path.get(i));
             }
         }
-
-        return root;
     }
 
     public TreeNode getTreeNode(boolean isTerminating, String nodeValue) {
         return new TreeNode(isTerminating, nodeValue);
     }
 
-    public double getNodeCost(TreeNode parent, TreeNode child, HashMap<String, Restaurant> restaurantMap) {
+    public double getNodeCost(TreeNode parent, TreeNode child, HashMap<String, Restaurant> restaurantMap, HashMap<String, Double> graph) {
         double cost = 0.0;
         double parentNodeCost = parent.getCost();
+
         if (child.getNodeName().charAt(0) == 'C') {
-            cost = parentNodeCost + distanceCalculator.calculateDistance(parent.getLocation(), child.getLocation());
+            cost = parentNodeCost + graph.get(parent.getNodeName() + child.getNodeName());
         } else if (child.getNodeName().charAt(0) == 'R') {
-            cost = Math.max(parentNodeCost + distanceCalculator.calculateDistance(parent.getLocation(), child.getLocation()),
-            restaurantMap.get(child.getNodeName()).getPreparationTime());
+            cost = Math.max((parentNodeCost + graph.get(parent.getNodeName() + child.getNodeName())),restaurantMap.get(child.getNodeName()).getPreparationTime());
         }
         return cost;
     }
-
 }

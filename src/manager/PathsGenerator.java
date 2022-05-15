@@ -5,7 +5,6 @@ import java.util.List;
 
 public class PathsGenerator {
 
-
     public PathsGenerator() {
     }
 
@@ -29,7 +28,7 @@ public class PathsGenerator {
         str.set(y, temp);
     }
      
-    public static List<List<String>> getValidPaths(int n) {
+    public List<List<String>> getValidPaths(int n) {
         List<String> basePath = new ArrayList<>();
         basePath.add("A");
         for(int i=1; i<=n; i++) {

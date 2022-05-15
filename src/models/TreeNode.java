@@ -7,6 +7,7 @@ public class TreeNode {
     String nodeName;
     double cost;
     Location location;
+    TreeNode parent;
     HashMap<String, TreeNode> children;
 
     public TreeNode(boolean terminating, String nodeName) {
@@ -58,6 +59,14 @@ public class TreeNode {
 
     public void setChildren(HashMap<String,TreeNode> children) {
         this.children = children;
+    }
+
+    public TreeNode getParent() {
+        return this.parent;
+    }
+
+    public void setParent(TreeNode parent) {
+        this.parent = parent;
     }
 
 

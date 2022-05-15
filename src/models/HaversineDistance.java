@@ -21,6 +21,5 @@ public class HaversineDistance implements Distance {
 
         double c = 2 * Math.asin(Math.sqrt(x));
         return radius * c;
-
     }
 }
