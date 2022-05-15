@@ -8,63 +8,36 @@ import java.util.List;
 
 import manager.PathsGenerator;
 import manager.TreeBuilder;
+import utils.ServiceUtils;
 
 public class BestRouteApplication {
 
     public static void main(String[] args) {
-        final int customerRestaurantPairs = 2;
-        Double pt1 = 50.0;
-        Double pt2 = 70.0;
-        Double amanLatitude = 5.0;
-        Double amanLongitude = 10.0;
-        Double c1Latitude = 10.0;
-        Double c1Longitude = 20.0;
-        Double r1Latitude = 20.0;
-        Double r1Longitude = 30.0;
-        Double c2Latitude = 40.0;
-        Double c2Longitude = 20.0;
-        Double r2Latitude = 30.0;
-        Double r2Longitude = 30.0;
+        DeliveryAgent deliveryAgent = new DeliveryAgent("1", ServiceUtils.amanLocation);
 
-        Location amanLocation = new Location(amanLatitude, amanLongitude);
-        Location c1Location = new Location(c1Latitude, c1Longitude);
-        Location r1Location = new Location(r1Latitude, r1Longitude);
-        Location c2Location = new Location(c2Latitude, c2Longitude);
-        Location r2Location = new Location(r2Latitude, r2Longitude);
+        // just for design level understanding, values aren't used anywhere
+        Customer customer1 = new Customer(ServiceUtils.c1Location);
+        Restaurant restaurant1 = new Restaurant(ServiceUtils.r1Location, ServiceUtils.pt1);
+        Order order1 = new Order(customer1, restaurant1, "1", deliveryAgent, OrderState.RECEIVED);
+        customer1.getOrders().add(order1);
+        restaurant1.getOrders().add(order1);
 
-        DeliveryAgent deliveryAgent = new DeliveryAgent("1", amanLocation);
-
-        List<Order> lc1 = new ArrayList<>();
-        List<Order> lr1 = new ArrayList<>();
-        Customer c1 = new Customer(c1Location, lc1);
-        Restaurant r1 = new Restaurant(r1Location, pt1, lr1);
-        Order o1 = new Order(c1, r1, "1", deliveryAgent, OrderState.RECEIVED);
-        lc1.add(o1);
-        lr1.add(o1);
-
-        List<Order> lc2 = new ArrayList<>();
-        List<Order> lr2 = new ArrayList<>();
-        Customer c2 = new Customer(c2Location, lc2);
-        Restaurant r2 = new Restaurant(r2Location, pt2, lr2);
-        Order o2 = new Order(c2, r2, "2", deliveryAgent, OrderState.RECEIVED);
-        lc2.add(o2);
-        lr2.add(o2);
+        Customer customer2 = new Customer(ServiceUtils.c2Location);
+        Restaurant restaurant2 = new Restaurant(ServiceUtils.r2Location, ServiceUtils.pt2);
+        Order order2 = new Order(customer2, restaurant2, "2", deliveryAgent, OrderState.RECEIVED);
+        customer2.getOrders().add(order2);
+        restaurant2.getOrders().add(order2);
         
         PathsGenerator generator = new PathsGenerator();
-        List<List<String>> validPathsList = generator.getValidPaths(customerRestaurantPairs);
+        List<List<String>> validPathsList = generator.getValidPaths(ServiceUtils.customerRestaurantPairs);
 
         HashMap<String, Restaurant> restaurantMap = new HashMap<>();
-        restaurantMap.put("R1", r1);
-        restaurantMap.put("R2", r2);
+        restaurantMap.put("R1", restaurant1);
+        restaurantMap.put("R2", restaurant2);
 
-        HashMap<String, Location> locationMap = new HashMap<>();
-        locationMap.put("A", amanLocation);
-        locationMap.put("R1", r1Location);
-        locationMap.put("C1", c1Location);
-        locationMap.put("R2", r2Location);
-        locationMap.put("C2", c2Location);
+        HashMap<String, Location> locationMap = ServiceUtils.getLocationMap();
 
-        HashMap<String, Double> graph = precomputeDistance(customerRestaurantPairs, locationMap);
+        HashMap<String, Double> graph = precomputeDistance(ServiceUtils.customerRestaurantPairs, locationMap);
 
         TreeBuilder treeBuilder = new TreeBuilder();
         
@@ -72,13 +45,13 @@ public class BestRouteApplication {
         treeBuilder.buildTree(validPathsList, restaurantMap, locationMap, leafNodeList, graph);
         
         TreeNode minCostNode = getMinCostNode(leafNodeList);
-        System.out.println("Cost: " + minCostNode.getCost());
+
         if(minCostNode!=null) {
+            System.out.println("Cost: " + minCostNode.getCost());
             List<TreeNode> optimizedPath = getOptimizedPath(minCostNode);
             printPath(optimizedPath);
         }
-        
-    }   
+    }  
 
     private static void printPath(List<TreeNode> optimizedPath) {
         int i;

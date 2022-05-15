@@ -24,13 +24,4 @@ public class Location {
     public void setLongitude(final Double longitude) {
         this.longitude = longitude;
     }
-
-    // @Override
-    // public String toString() {
-    //     return "{" +
-    //         " latitude='" + getLatitude() + "'" +
-    //         ", longitude='" + getLongitude() + "'" +
-    //         "}";
-    // }
-
 }

@@ -1,14 +1,15 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Customer {
     private Location customerLocation;
     private List<Order> orders;
 
-    public Customer(final Location customerLocation, final List<Order> orders) {
+    public Customer(final Location customerLocation) {
         this.customerLocation = customerLocation;
-        this.orders = orders;
+        this.orders = new ArrayList<>();
     }
 
     public Location getCustomerLocation() {

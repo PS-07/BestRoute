@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Restaurant {
@@ -15,10 +16,10 @@ public class Restaurant {
         return false;
     }
 
-    public Restaurant(final Location restaurantLocation, final Double preparationTime, final List<Order> orders) {
+    public Restaurant(final Location restaurantLocation, final Double preparationTime) {
         this.restaurantLocation = restaurantLocation;
         this.preparationTime = preparationTime;
-        this.orders = orders;
+        this.orders = new ArrayList<>();
     }
 
     public Location getRestaurantLocation() {
@@ -44,13 +45,4 @@ public class Restaurant {
     public void setOrders(final List<Order> orders) {
         this.orders = orders;
     }
-
-    // @Override
-    // public String toString() {
-    //     return "{" +
-    //         " restaurantLocation='" + getRestaurantLocation() + "'" +
-    //         ", preparationTime='" + getPreparationTime() + "'" +
-    //         ", orders='" + getOrders() + "'" +
-    //         "}";
-    // }
 }

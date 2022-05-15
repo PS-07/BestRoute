@@ -1,8 +1,6 @@
 package models;
 
 public class Order {
-    //customer
-    //restaurant
     private Customer customer;
     private Restaurant restaurant;
     private String orderId;

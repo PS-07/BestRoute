@@ -16,7 +16,6 @@ public class TreeNode {
         this.children = new HashMap<>();
     }
     
-
     public boolean isTerminating() {
         return this.terminating;
     }
@@ -68,13 +67,4 @@ public class TreeNode {
     public void setParent(TreeNode parent) {
         this.parent = parent;
     }
-
-
-    @Override
-    public String toString() {
-        return "{" +
-            ", children='" + getChildren() + "'" +
-            "}";
-    }
-    
 }
