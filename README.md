@@ -1,7 +1,9 @@
 # Best Route
 
 ## Problem Statement
-Find optimized route for a delivery agent to deliver food to customers from restaurants.
+Find optimized route for a delivery agent to deliver food to customers from restaurants.  
+[BestRouteProblem.pdf](https://github.com/PS-07/BestRoute/files/8696050/BestRouteProblem.pdf)
+
 
 ## Solution Approach
 
