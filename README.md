@@ -44,3 +44,12 @@ In this case, there are only 6 valid paths which A can take. The data structure 
 
 ### Further Optimizations
 - We can prune the tree if at any node in a path the cost is greater than current global minimum cost.  
+
+### Execution
+Add the following libraries:
+- jackson-annotations-2.13.3.jar
+- jackson-core-2.13.3.jar
+- jackson-databind-2.13.3.jar  
+
+Pass inputs to src/utils/input.json file  
+Run src/services/BestRouteApplication.java file from any IDE (VSCode/Intellij)

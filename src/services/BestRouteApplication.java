@@ -2,6 +2,7 @@ package services;
 
 import models.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,32 +13,25 @@ import utils.ServiceUtils;
 
 public class BestRouteApplication {
 
-    public static void main(String[] args) {
-        DeliveryAgent deliveryAgent = new DeliveryAgent("1", ServiceUtils.amanLocation);
+    public static void main(String[] args) throws IOException {
+        InputPojo input = ServiceUtils.getInput();
 
-        // just for design level understanding, values aren't used anywhere
-        Customer customer1 = new Customer(ServiceUtils.c1Location);
-        Restaurant restaurant1 = new Restaurant(ServiceUtils.r1Location, ServiceUtils.pt1);
-        Order order1 = new Order(customer1, restaurant1, "1", deliveryAgent, OrderState.RECEIVED);
-        customer1.getOrders().add(order1);
-        restaurant1.getOrders().add(order1);
-
-        Customer customer2 = new Customer(ServiceUtils.c2Location);
-        Restaurant restaurant2 = new Restaurant(ServiceUtils.r2Location, ServiceUtils.pt2);
-        Order order2 = new Order(customer2, restaurant2, "2", deliveryAgent, OrderState.RECEIVED);
-        customer2.getOrders().add(order2);
-        restaurant2.getOrders().add(order2);
+        DeliveryAgent deliveryAgent = input.getDeliveryAgent();
+        List<Customer> customerList = input.getCustomers();
+        List<Restaurant> restaurantList = input.getRestaurants();
+        int customerRestaurantPairs = customerList.size();
         
         PathsGenerator generator = new PathsGenerator();
-        List<List<String>> validPathsList = generator.getValidPaths(ServiceUtils.customerRestaurantPairs);
+        List<List<String>> validPathsList = generator.getValidPaths(customerRestaurantPairs);
 
         HashMap<String, Restaurant> restaurantMap = new HashMap<>();
-        restaurantMap.put("R1", restaurant1);
-        restaurantMap.put("R2", restaurant2);
+        for(Restaurant restaurant : restaurantList) {
+            restaurantMap.put(restaurant.getRestaurantId(), restaurant);
+        }
 
-        HashMap<String, Location> locationMap = ServiceUtils.getLocationMap();
+        HashMap<String, Location> locationMap = ServiceUtils.getLocationMap(deliveryAgent, customerList, restaurantList);
 
-        HashMap<String, Double> graph = precomputeDistance(ServiceUtils.customerRestaurantPairs, locationMap);
+        HashMap<String, Double> graph = getGraph(customerRestaurantPairs, locationMap);
 
         TreeBuilder treeBuilder = new TreeBuilder();
         
@@ -83,7 +77,7 @@ public class BestRouteApplication {
         return optimizedPath;
     }
 
-    public static HashMap<String, Double> precomputeDistance(int customerRestaurantPairs, HashMap<String, Location> locationMap) {
+    public static HashMap<String, Double> getGraph(int customerRestaurantPairs, HashMap<String, Location> locationMap) {
         HashMap<String, Double> graph = new HashMap<>();
         HaversineDistance harvesineDistance = new HaversineDistance();
 

@@ -1,12 +1,24 @@
 package models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Restaurant {
+
+    private String restaurantId;
+
     private Location restaurantLocation;
+
     private Double preparationTime;
+
     private List<Order> orders;
+
+    public String getRestaurantId() {
+        return this.restaurantId;
+    }
+
+    public void setRestaurantId(String restaurantId) {
+        this.restaurantId = restaurantId;
+    }
 
     public void acceptOrder(final Order order) {
         this.orders.add(order);
@@ -16,11 +28,19 @@ public class Restaurant {
         return false;
     }
 
-    public Restaurant(final Location restaurantLocation, final Double preparationTime) {
+    public Restaurant(String restaurantId, Location restaurantLocation, Double preparationTime, List<Order> orders) {
+        this.restaurantId = restaurantId;
         this.restaurantLocation = restaurantLocation;
         this.preparationTime = preparationTime;
-        this.orders = new ArrayList<>();
+        this.orders = orders;
     }
+
+    public Restaurant(Location restaurantLocation, Double preparationTime) {
+        this.restaurantLocation = restaurantLocation;
+        this.preparationTime = preparationTime;
+    }
+
+    
 
     public Location getRestaurantLocation() {
         return restaurantLocation;

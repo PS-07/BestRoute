@@ -1,7 +1,9 @@
 package models;
 
 public class DeliveryAgent {
+
     private String agentId;
+
     private Location startLocation;
 
     public DeliveryAgent(final String agentId, final Location startLocation) {

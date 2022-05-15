@@ -12,7 +12,9 @@ public class PathsGenerator {
         if (left == right) {
             List<String> basePathCopy = new ArrayList<>();
             basePathCopy.addAll(basePath);
-            allPermuationList.add(basePathCopy);
+            if (isValid(basePathCopy)) {
+                allPermuationList.add(basePathCopy);
+            }
         } else {
             for(int i=left; i<=right; i++) {
                 swap(basePath, left, i);
@@ -41,16 +43,8 @@ public class PathsGenerator {
         List<List<String>> allPathsList = new ArrayList<>();
 
         allPermutations(basePath, 1, basePath.size()-1, allPathsList);
-
-        List<List<String>> validPaths = new ArrayList<>();
-
-        for(List<String> path: allPathsList) {
-            if(isValid(path)) {
-                validPaths.add(path);
-            }
-        }
         
-        return validPaths;
+        return allPathsList;
     }
     
     public static boolean isValid(final List<String> path) {

@@ -1,0 +1,51 @@
+{
+    "deliveryAgent" : {
+        "agentId" : "A",
+        "startLocation" : {
+            "latitude" : 5.0,
+            "longitude" : 10.0
+        }
+    },
+
+    "customers": [
+        {
+            "customerId" : "C1",
+            "orders" : [],
+            "customerLocation" : {
+                "latitude" : 10.0,
+                "longitude" : 20.0
+            }
+        }, 
+        
+        {
+            "customerId" : "C2",
+            "orders" : [],
+            "customerLocation" : {
+                "latitude" : 40.0,
+                "longitude" : 20.0
+            }
+        }
+    ],
+
+    "restaurants": [
+        {
+            "restaurantId" : "R1",
+            "restaurantLocation" : {
+                "latitude" : 20.0,
+                "longitude" : 30.0
+            },
+            "preparationTime": 50.0,
+            "orders": []
+        },
+
+        {
+            "restaurantId" : "R2",
+            "restaurantLocation" : {
+                "latitude" : 30.0,
+                "longitude" : 30.0
+            },
+            "preparationTime": 70.0,
+            "orders": []
+        }
+    ]
+}

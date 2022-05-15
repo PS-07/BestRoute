@@ -1,16 +1,30 @@
 package models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Customer {
+
+    private String customerId;
+
     private Location customerLocation;
+
     private List<Order> orders;
 
-    public Customer(final Location customerLocation) {
-        this.customerLocation = customerLocation;
-        this.orders = new ArrayList<>();
+    public String getCustomerId() {
+        return this.customerId;
     }
+
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
+    }
+
+
+    public Customer(String customerId, Location customerLocation, List<Order> orders) {
+        this.customerId = customerId;
+        this.customerLocation = customerLocation;
+        this.orders = orders;
+    }
+
 
     public Location getCustomerLocation() {
         return customerLocation;
