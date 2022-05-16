@@ -1,13 +1,9 @@
 package models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class Location {
 
-    @JsonProperty("latitude")
     private Double latitude;
 
-    @JsonProperty("longitude")
     private Double longitude;
 
     public Location(final Double latitude, final Double longitude) {

@@ -16,12 +16,10 @@ public class InputPojo {
 
     List<Restaurant> restaurants;
 
-
     public InputPojo() {
         this.customers = new ArrayList<>();
         this.restaurants = new ArrayList<>();
     }
-    
 
     @SuppressWarnings("unchecked")
     @JsonProperty("deliveryAgent")
@@ -41,7 +39,6 @@ public class InputPojo {
             this.customers.add(customer);
         }
     }
-
     
     @SuppressWarnings("unchecked")
     @JsonProperty("restaurants")

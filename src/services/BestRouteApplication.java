@@ -19,6 +19,7 @@ public class BestRouteApplication {
         DeliveryAgent deliveryAgent = input.getDeliveryAgent();
         List<Customer> customerList = input.getCustomers();
         List<Restaurant> restaurantList = input.getRestaurants();
+        // assuming each customer orders from a unique restaurant
         int customerRestaurantPairs = customerList.size();
         
         PathsGenerator generator = new PathsGenerator();

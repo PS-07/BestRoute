@@ -15,15 +15,7 @@ public class DeliveryAgent {
         return agentId;
     }
 
-    public void setAgentId(final String agentId) {
-        this.agentId = agentId;
-    }
-
     public Location getStartLocation() {
         return startLocation;
-    }
-
-    public void setStartLocation(final Location startLocation) {
-        this.startLocation = startLocation;
     }
 }

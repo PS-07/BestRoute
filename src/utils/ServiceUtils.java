@@ -10,7 +10,6 @@ import java.util.List;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-// all inputs go here
 public class ServiceUtils {
 
     private static final ObjectMapper objectMapper = new ObjectMapper();

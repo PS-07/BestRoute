@@ -15,25 +15,13 @@ public class TreeNode {
         this.nodeName = nodeName;
         this.children = new HashMap<>();
     }
-    
-    public boolean isTerminating() {
-        return this.terminating;
-    }
 
     public boolean getTerminating() {
         return this.terminating;
     }
 
-    public void setTerminating(boolean terminating) {
-        this.terminating = terminating;
-    }
-
     public String getNodeName() {
         return this.nodeName;
-    }
-
-    public void setNodeName(String nodeName) {
-        this.nodeName = nodeName;
     }
 
     public double getCost() {
@@ -54,10 +42,6 @@ public class TreeNode {
 
     public HashMap<String,TreeNode> getChildren() {
         return this.children;
-    }
-
-    public void setChildren(HashMap<String,TreeNode> children) {
-        this.children = children;
     }
 
     public TreeNode getParent() {

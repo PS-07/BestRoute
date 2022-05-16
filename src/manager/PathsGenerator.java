@@ -5,9 +5,6 @@ import java.util.List;
 
 public class PathsGenerator {
 
-    public PathsGenerator() {
-    }
-
     public static void allPermutations(List<String> basePath, int left, int right, List<List<String>> allPermuationList) {
         if (left == right) {
             List<String> basePathCopy = new ArrayList<>();

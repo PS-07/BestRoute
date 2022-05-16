@@ -8,16 +8,12 @@ public class Customer {
 
     private Location customerLocation;
 
+    // added for extensibility
     private List<Order> orders;
 
     public String getCustomerId() {
         return this.customerId;
     }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
-
 
     public Customer(String customerId, Location customerLocation, List<Order> orders) {
         this.customerId = customerId;
@@ -25,20 +21,7 @@ public class Customer {
         this.orders = orders;
     }
 
-
     public Location getCustomerLocation() {
         return customerLocation;
-    }
-
-    public void setCustomerLocation(final Location customerLocation) {
-        this.customerLocation = customerLocation;
-    }
-
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(final List<Order> orders) {
-        this.orders = orders;
     }
 }

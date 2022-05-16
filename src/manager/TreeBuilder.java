@@ -22,7 +22,7 @@ public class TreeBuilder {
         root.setCost(0.0);
         root.setParent(null);
         root.setLocation(locationMap.get("A"));
-        TreeNode parent = root;
+        TreeNode parent;
         boolean isTerminating;
 
         for(List<String> path: validPathsList) {

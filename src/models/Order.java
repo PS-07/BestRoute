@@ -1,5 +1,6 @@
 package models;
 
+// Class not used but still kept for extensibility purposes
 public class Order {
     private Customer customer;
     private Restaurant restaurant;
